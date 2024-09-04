@@ -52,13 +52,12 @@ app.get('/fetchReviews', async (req, res) => {
 });
 
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
-    try {
-        const documents = await Dealerships.find({ id: req.params.id });
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(documents, null, 2));
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching documents' });
-    }
+  try {
+    const documents = await Reviews.find({ dealership: req.params.id });
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching reviews by dealer ID' });
+  }
 });
 
 app.get('/dealerships', async (req, res) => {
@@ -93,18 +92,13 @@ app.get('/fetchDealers/:state', async (req, res) => {
 
 // New Endpoint: Fetch dealer by ID
 app.get('/fetchDealer/:id', async (req, res) => {
-    try {
-      const id = req.params.id;
-      const dealer = await Dealerships.findOne({ id: parseInt(id) }); // Assuming 'id' is a numeric field
-      if (dealer) {
-        res.json(dealer);
-      } else {
-        res.status(404).json({ error: 'Dealer not found' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: 'Error fetching the dealership' });
-    }
-  });
+  try {
+    const documents = await Dealerships.find({ id: req.params.id });
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching dealers by ID' });
+  }
+});
   
 
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
