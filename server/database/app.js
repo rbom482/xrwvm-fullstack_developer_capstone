@@ -53,7 +53,7 @@ app.get('/fetchReviews', async (req, res) => {
 
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
     try {
-        const documents = await Reviews.find({ dealership: req.params.id });
+        const documents = await Dealerships.find({ id: req.params.id });
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(documents, null, 2));
     } catch (error) {
