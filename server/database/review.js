@@ -1,19 +1,22 @@
+/* jshint esversion: 6 */
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const reviews = new Schema({
-	id: {
+const reviewSchema = new Schema({
+  id: {
     type: Number,
     required: true,
-	},
-	name: {
+    unique: true  // Ensuring the custom id is unique if necessary
+  },
+  name: {
     type: String,
     required: true
   },
   dealership: {
     type: Number,
-    required: true,
+    required: true
   },
   review: {
     type: String,
@@ -24,7 +27,7 @@ const reviews = new Schema({
     required: true
   },
   purchase_date: {
-    type: String,
+    type: Date,  // Changed to Date type for better handling of dates
     required: true
   },
   car_make: {
@@ -38,7 +41,8 @@ const reviews = new Schema({
   car_year: {
     type: Number,
     required: true
-  },
+  }
 });
 
-module.exports = mongoose.model('reviews', reviews);
+// Export the model with a singular name
+module.exports = mongoose.model('Review', reviewSchema);
