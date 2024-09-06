@@ -1,4 +1,7 @@
 from .models import CarMake, CarModel
+import logging
+
+logger = logging.getLogger(__name__)
 
 def initiate():
     # CarMake data
@@ -12,13 +15,18 @@ def initiate():
 
     # Create CarMake instances
     car_make_instances = []
-    for data in car_make_data:
-        car_make = CarMake.objects.create(
-            name=data['name'], 
-            description=data['description']
-        )
-        car_make_instances.append(car_make)
-
+    try:
+        for data in car_make_data:
+            car_make = CarMake.objects.create(
+                name=data['name'],
+                description=data['description']
+            )
+            car_make_instances.append(car_make)
+        logger.info("CarMake instances created successfully.")
+    except Exception as e:
+        logger.error(f"Error creating CarMake instances: {e}")
+        return  # Exit early if an error occurs
+    
     # CarModel data with corresponding CarMake instances
     car_model_data = [
         {"name": "Pathfinder", "type": "SUV", "year": 2023, "car_make": car_make_instances[0]},
@@ -39,10 +47,14 @@ def initiate():
     ]
 
     # Create CarModel instances
-    for data in car_model_data:
-        CarModel.objects.create(
-            name=data['name'], 
-            car_make=data['car_make'], 
-            type=data['type'], 
-            year=data['year']
-        )
+    try:
+        for data in car_model_data:
+            CarModel.objects.create(
+                name=data['name'],
+                car_make=data['car_make'],
+                type=data['type'],
+                year=data['year']
+            )
+        logger.info("CarModel instances created successfully.")
+    except Exception as e:
+        logger.error(f"Error creating CarModel instances: {e}")
