@@ -81,7 +81,7 @@ def registration(request):
 def get_dealerships(request, state="All"):
     try:
         endpoint = (
-            "/fetchDealers" if state == "All" 
+            "/fetchDealers" if state == "All"
             else f"/fetchDealers/{state}"
         )
         dealerships = get_request(endpoint)
