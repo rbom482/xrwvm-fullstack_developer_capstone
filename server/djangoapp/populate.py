@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 
 def initiate():
 
-    
+
     # CarMake data
     car_make_data = [
         {"name": "NISSAN", "description": "Great cars. Japanese technology"},
