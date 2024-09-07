@@ -68,13 +68,30 @@ def registration(request):
         login(request, user)
         return JsonResponse({
             "userName": username, "status": "Authenticated"
-        })
+         })
     
     except Exception as e:
         logger.error(f"Error in registration: {e}")
         return JsonResponse({
             "status": "Error in registration process"
         }, status=500)
+
+
+# View to get the list of dealerships
+def get_dealerships(request, state="All"):
+    try:
+        endpoint = (
+            "/fetchDealers" if state == "All" 
+            else f"/fetchDealers/{state}"
+        )
+        dealerships = get_request(endpoint)
+        return JsonResponse({"status": 200, "dealers": dealerships})
+    except Exception as e:
+        logger.error(f"Error in get_dealerships: {e}")
+        return JsonResponse({
+            "status": "Error fetching dealerships"
+        }, status=500)
+
 
 
 # View to get the list of dealerships
