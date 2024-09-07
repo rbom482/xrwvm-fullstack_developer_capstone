@@ -3,7 +3,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def initiate():
+    """Initialize CarMake and CarModel instances."""
+    
     # CarMake data
     car_make_data = [
         {"name": "NISSAN", "description": "Great cars. Japanese technology"},
@@ -26,7 +29,7 @@ def initiate():
     except Exception as e:
         logger.error(f"Error creating CarMake instances: {e}")
         return  # Exit early if an error occurs
-    
+
     # CarModel data with corresponding CarMake instances
     car_model_data = [
         {"name": "Pathfinder", "type": "SUV", "year": 2023, "car_make": car_make_instances[0]},
