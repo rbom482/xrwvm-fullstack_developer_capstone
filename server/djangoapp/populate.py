@@ -4,7 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 def initiate():
-    """Initialize CarMake and CarModel instances."""
+
     
     # CarMake data
     car_make_data = [
