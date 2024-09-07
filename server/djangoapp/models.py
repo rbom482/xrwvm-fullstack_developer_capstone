@@ -16,7 +16,6 @@ class CarMake(models.Model):
 class CarModel(models.Model):
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    
     # Defining the car types as choices
     CAR_TYPES = [
         ('SEDAN', 'Sedan'),
@@ -25,7 +24,6 @@ class CarModel(models.Model):
         # Add more choices as needed
     ]
     type = models.CharField(max_length=15, choices=CAR_TYPES, default='SUV')  # Increased max_length to 15
-
     # Year field with validators for range between 2015 and 2023
     year = models.IntegerField(
         default=2023,
