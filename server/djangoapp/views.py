@@ -69,14 +69,12 @@ def registration(request):
         return JsonResponse({
             "userName": username, "status": "Authenticated"
         })
-    
-    # Exception handling in registration view
+
     except Exception as e:
         logger.error(f"Error in registration: {e}")
         return JsonResponse({
             "status": "Error in registration process"
         }, status=500)
-
 
 
 # View to get the list of dealerships
@@ -146,7 +144,7 @@ def get_cars(request):
     try:
         if CarMake.objects.count() == 0:
             initiate()
-        
+
         car_models = CarModel.objects.select_related('car_make')
         cars = [
             {"CarModel": car_model.name,
@@ -154,7 +152,7 @@ def get_cars(request):
             for car_model in car_models
         ]
         return JsonResponse({"CarModels": cars})
-    
+
     except Exception as e:
         logger.error(f"Error in get_cars: {e}")
         return JsonResponse({
