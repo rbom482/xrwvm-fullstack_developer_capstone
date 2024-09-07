@@ -28,8 +28,9 @@ def initiate():
     except Exception as e:
         logger.error(f"Error creating CarMake instances: {e}")
         return  # Exit early if an error occurs
-
+        
    # CarModel data with corresponding CarMake instances
+
 car_model_data = [
     {
         "name": "Pathfinder", "type": "SUV", "year": 2023,
