@@ -68,13 +68,15 @@ def registration(request):
         login(request, user)
         return JsonResponse({
             "userName": username, "status": "Authenticated"
-         })
-# Exception handling in registration view
-except Exception as e:
-    logger.error(f"Error in registration: {e}")
-    return JsonResponse({
-        "status": "Error in registration process"
-    }, status=500)
+        })
+    
+    # Exception handling in registration view
+    except Exception as e:
+        logger.error(f"Error in registration: {e}")
+        return JsonResponse({
+            "status": "Error in registration process"
+        }, status=500)
+
 
 
 # View to get the list of dealerships
